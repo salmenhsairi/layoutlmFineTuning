@@ -134,32 +134,6 @@ if __name__ == '__main__':
     boxes_column_name = "bboxes"
     label_column_name = "ner_tags"
 
-    # In the event the labels are not a `Sequence[ClassLabel]`, we will need to go through the dataset to get the
-    # unique labels.
-
-
-#     def get_label_list(labels):
-#         unique_labels = set()
-#         for label in labels:
-#             unique_labels = unique_labels | set(label)
-#         label_list = list(unique_labels)
-#         label_list.sort()
-#         return label_list
-
-
-#     if isinstance(features[label_column_name].feature, ClassLabel):
-#         label_list = features[label_column_name].feature.names
-#         # No need to convert the labels since they are already ints.
-#         id2label = {k: v for k, v in enumerate(label_list)}
-#         label2id = {v: k for k, v in enumerate(label_list)}
-#     else:
-#         label_list = get_label_list(dataset["train"][label_column_name])
-#         id2label = {k: v for k, v in enumerate(label_list)}
-#         label2id = {v: k for k, v in enumerate(label_list)}
-#     num_labels = len(label_list)
-
-    
-
     # we need to define custom features for `set_format` (used later on) to work properly
     features = Features({
         'pixel_values': Array3D(dtype="float32", shape=(3, 224, 224)),
