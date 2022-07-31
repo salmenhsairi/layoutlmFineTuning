@@ -1,4 +1,5 @@
 from .utils import load_model,load_processor,normalize_box,compare_boxes,adjacent
+from .model_base_path import LAYOUTLMV2_BASE_PATH,LAYOUTLMV3_BASE_PATH 
 from .annotate_image import get_flattened_output,annotate_image
 from PIL import Image,ImageDraw, ImageFont
 import logging
@@ -51,7 +52,13 @@ class ModelHandler(object):
         # assert self._batch_size == len(batch), "Invalid input batch size: {}".format(len(batch))
         inference_dict = batch
         self._raw_input_data = inference_dict
-        model_name_or_path = self.model.config._name_or_path
+        model_name_or_path = None
+        if 'v2' in self.model.config.architectures[0]:
+            model_name_or_path = LAYOUTLMV2_BASE_PATH
+        elif 'v3' in self.model.config.architectures[0]:
+            model_name_or_path = LAYOUTLMV3_BASE_PATH
+        else:
+            raise ValueError('invalid model architecture, please make sure the model is either Layoutlmv2 or Layoutlmv3')
         processor = load_processor(model_name_or_path)
         images = [Image.open(path).convert("RGB")
                   for path in inference_dict['image_path']]
