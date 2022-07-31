@@ -44,7 +44,7 @@ def load_model(model_path):
     model = AutoModelForTokenClassification.from_pretrained(model_path)
     return model
 
-def load_processor():
+def load_processor(model_name_or_path):
     processor = AutoProcessor.from_pretrained(
-        "microsoft/layoutlmv3-base", apply_ocr=False)
+        model_name_or_path, apply_ocr=False)
     return processor
