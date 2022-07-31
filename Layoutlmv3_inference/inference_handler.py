@@ -51,7 +51,8 @@ class ModelHandler(object):
         # assert self._batch_size == len(batch), "Invalid input batch size: {}".format(len(batch))
         inference_dict = batch
         self._raw_input_data = inference_dict
-        processor = load_processor()
+        model_name_or_path = self.model.config._name_or_path
+        processor = load_processor(model_name_or_path)
         images = [Image.open(path).convert("RGB")
                   for path in inference_dict['image_path']]
         self._images_size = [img.size for img in images]
