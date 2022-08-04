@@ -1,7 +1,7 @@
 import argparse
 from asyncio.log import logger
-from Layoutlmv3_inference.ocr import prepare_batch_for_inference
-from Layoutlmv3_inference.inference_handler import handle
+from Layoutlm_inference.ocr import prepare_batch_for_inference
+from Layoutlm_inference.inference_handler import handle
 import logging
 import os
 
